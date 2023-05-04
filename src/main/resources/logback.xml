@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- debug="true" allows status info to get printed to the console if something 
+	goes wrong parsing the configuration file -->
+<!-- By default, scans the config file for changes every 60 seconds. Can 
+	change it using the scanPeriod="time period" property. Can be specified in 
+	seconds, milliseconds, minutes, or hours. -->
+<configuration debug="true" scanPeriod="30 seconds">
+	<!-- Displays status messages when the application is running -->
+	<statusListener
+		class="ch.qos.logback.core.status.OnConsoleStatusListener" />
+
+	<appender name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="ERATOSTHENES" class="ch.qos.logback.core.FileAppender">
+		<file>eratosthenes.log</file>
+		<append>true</append>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<root level="DEBUG">
+		<appender-ref ref="STDOUT" />
+	</root>
+	<logger name="eratosthenes" level="TRACE" additivity="false">
+		<appender-ref ref="ERATOSTHENES"></appender-ref>
+	</logger>
+</configuration>
